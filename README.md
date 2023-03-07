@@ -1,5 +1,9 @@
 # Pseudo code for a Human Resource application
 
+- `Design approach`: Domain Driven Design, The Clean Architecture, SOLID.
+- `Database type`: NoSQL
+- `Language`: TypeScript
+
 ## how to get started:
 
 1. [Install Node.js](https://nodejs.org/en/download/)
