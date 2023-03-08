@@ -11,23 +11,9 @@ export abstract class BaseRepo<T> {
     this.limit = limit || 30;
   }
 
-  public create(data: T): T {
-    throw new Error('Not implemented');
-  }
-
-  public update(id: string, data: T): T {
-    throw new Error('Not implemented');
-  }
-
-  public delete(id: string): boolean {
-    throw new Error('Not implemented');
-  }
-
-  public getOneById(id: string): T {
-    throw new Error('Not implemented');
-  }
-
-  public getAll(page = 1): Paging {
-    throw new Error('Not implemented');
-  }
+  public abstract create(data: T): T;
+  public abstract update(id: string, data: T): T;
+  public abstract delete(id: string): boolean;
+  public abstract getOneById(id: string): T;
+  public abstract getAll(page: number): Paging;
 }
