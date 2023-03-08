@@ -7,7 +7,7 @@ export class ShiftInMemoryDataRepository extends BaseRepo<IShift> {
   public store;
   public limit: number;
 
-  constructor(limit = 30) {
+  constructor(limit?: number) {
     super(limit);
     this.store = InMemoryStore.Shift;
     this.limit = limit || 30;

@@ -1,23 +1,14 @@
-import { FacilityInMemoryDataRepository } from '@src/Domains/Facilities/Data Repository/FacilityInMemoryDataRepository';
-import { Facility } from '@src/Domains/Facilities/Data Model/Facility';
-import { seed } from '@tests/Domains/Facilities/Payloads/seed';
+import { ShiftInMemoryDataRepository } from '@src/Domains/Shifts/Data Repository/ShiftInMemoryDataRepository';
+import { Shift } from '@src/Domains/Shifts/Data Model/Shift';
+import { seed } from '@tests/Domains/Shifts/Payloads/seed';
 
-const Billing = {
-  name: 'Billing Engineers',
-  id: '13d84160-347f-43f4-b792-de2bf1acfc0e',
-};
-
-const BillingStaff = {
-  name: 'Billing Staff',
-};
-
-describe('facility Data Repository', () => {
+describe('shift Data Repository', () => {
   let repo = null;
   // eslint-disable-next-line jest/no-hooks
   beforeAll(() => {
-    repo = new FacilityInMemoryDataRepository();
+    repo = new ShiftInMemoryDataRepository();
     seed.forEach((record) => {
-      const model = new Facility(record);
+      const model = new Shift(record);
       repo.create(model);
     });
   });
@@ -31,41 +22,43 @@ describe('facility Data Repository', () => {
   });
   it('create record with ID', () => {
     expect.hasAssertions();
-    const model = new Facility(Billing);
+    const model = new Shift(seed[0]);
     const record = repo.create(model);
-    expect(record).toHaveProperty('name');
+    expect(record).toHaveProperty('facilityId');
     expect(record).toHaveProperty('id');
-    expect(record.id).toBe(Billing.id);
-    expect(record.name).toBe(Billing.name);
+    expect(record.id).toBe(seed[0].id);
+    expect(record.facilityId).toBe(seed[0].facilityId);
   });
   it('create record without ID', () => {
     expect.hasAssertions();
-    const model = new Facility(BillingStaff);
+    const r = seed[1];
+    delete r.id;
+    const model = new Shift(r);
     const record = repo.create(model);
-    expect(record).toHaveProperty('name');
+    expect(record).toHaveProperty('facilityId');
     expect(record).toHaveProperty('id');
     expect(record.id).toBeDefined();
-    expect(record.name).toBe(BillingStaff.name);
+    expect(record.facilityId).toBe(seed[1].facilityId);
   });
   it('getOneById', () => {
     expect.hasAssertions();
-    const record = repo.getOneById(Billing.id);
-    expect(record.name).toBe(Billing.name);
+    const record = repo.getOneById(seed[0].id);
+    expect(record.facilityId).toBe(seed[0].facilityId);
   });
   it('update record', () => {
     expect.hasAssertions();
-    let record = repo.getOneById(Billing.id);
-    expect(record.name).toBe(Billing.name);
-    record.name = 'Engineers Billing';
-    repo.update(Billing.id, new Facility(record));
-    record = repo.getOneById(Billing.id);
-    expect(record.name).toBe('Engineers Billing');
+    let record = repo.getOneById(seed[0].id);
+    expect(record.facilityId).toBe(seed[0].facilityId);
+    record.facilityId = 'Engineers seed[0]';
+    repo.update(seed[0].id, new Shift(record));
+    record = repo.getOneById(seed[0].id);
+    expect(record.facilityId).toBe('Engineers seed[0]');
   });
   it('delete record', () => {
     expect.hasAssertions();
-    const deleted = repo.delete(Billing.id);
+    const deleted = repo.delete(seed[0].id);
     expect(deleted).toBe(true);
-    const record = repo.getOneById(Billing.id);
+    const record = repo.getOneById(seed[0].id);
     expect(record).toBeUndefined();
   });
   it('getAll records', () => {
@@ -96,10 +89,12 @@ describe('facility Data Repository', () => {
   });
   it('set limit', () => {
     expect.hasAssertions();
-    repo = new FacilityInMemoryDataRepository(2);
-    const { records, page, pages } = repo.getAll(2);
+    repo = new ShiftInMemoryDataRepository(1);
+    const { records, page, pages } = repo.getAll(1);
+    // eslint-disable-next-line no-console
+    console.log({ records, page, pages });
     expect(records.length > 0).toBe(true);
-    expect(page).toBe(2);
+    expect(page).toBe(1);
     expect(pages).toBe(2);
   });
 });
