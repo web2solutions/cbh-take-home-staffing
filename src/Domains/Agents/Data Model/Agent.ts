@@ -1,13 +1,13 @@
 /* eslint-disable no-underscore-dangle */
 import { IAgent } from '@src/Domains/Agents/Data Entity/IAgent';
-import { UUID } from '@src/Infrastructure/utils/UUID';
+import { BaseModel } from '@src/Infrastructure/Persistence/BaseModel';
 
-export class Agent implements IAgent {
-  private _id: string;
+export class Agent extends BaseModel implements IAgent {
   private _name: string;
+
   constructor({ name, id }: { name: string, id?: string }) {
+    super(id);
     this._name = name;
-    this._id = id ? UUID.parse(id).toString() : UUID.create().toString();
   }
 
   public get name(): string {
@@ -18,14 +18,11 @@ export class Agent implements IAgent {
     this._name = name;
   }
 
-  public get id(): string {
-    return this._id;
-  }
-
   public serialize(): Record<string, unknown> {
     return {
-      id: this._id,
-      name: this._name,
+      id: this.id,
+      name: this.name,
+      ...this.baseSerialize(),
     };
   }
 }

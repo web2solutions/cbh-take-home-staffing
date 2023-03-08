@@ -9,13 +9,18 @@ describe('facility Data Model', () => {
     const model: IFacility = new Facility(createPayload);
     expect(model).toHaveProperty('id');
     expect(model).toHaveProperty('name');
+    expect(model).toHaveProperty('createdAt');
+    expect(model).toHaveProperty('updatedAt');
   });
   it('public write API', () => {
     expect.hasAssertions();
     const model: IFacility = new Facility(createPayload);
     const updatedName = 'Recruiting - Engineers';
     model.name = updatedName;
+    const now = new Date();
+    model.updatedAt = now;
     expect(model.name).toBe(updatedName);
+    expect(model.updatedAt).toBe(now);
   });
   it('create new Model - name must match', () => {
     expect.hasAssertions();

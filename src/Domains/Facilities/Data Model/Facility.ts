@@ -1,13 +1,13 @@
 /* eslint-disable no-underscore-dangle */
-import { UUID } from '@src/Infrastructure/utils/UUID';
 import { IFacility } from '@src/Domains/Facilities/Data Entity/IFacility';
+import { BaseModel } from '@src/Infrastructure/Persistence/BaseModel';
 
-export class Facility implements IFacility {
-  private _id: string;
+export class Facility extends BaseModel implements IFacility {
   private _name: string;
+
   constructor({ name, id }: { name: string, id?: string }) {
+    super(id);
     this._name = name;
-    this._id = id ? UUID.parse(id).toString() : UUID.create().toString();
   }
 
   public get name(): string {
@@ -18,14 +18,11 @@ export class Facility implements IFacility {
     this._name = name;
   }
 
-  public get id(): string {
-    return this._id;
-  }
-
   public serialize(): Record<string, unknown> {
     return {
-      id: this._id,
-      name: this._name,
+      id: this.id,
+      name: this.name,
+      ...this.baseSerialize(),
     };
   }
 }

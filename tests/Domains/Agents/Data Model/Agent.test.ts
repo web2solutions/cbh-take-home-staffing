@@ -7,15 +7,22 @@ describe('agent Data Model', () => {
   it('public read API', () => {
     expect.hasAssertions();
     const model: IAgent = new Agent(createPayload);
+    // eslint-disable-next-line no-console
+    console.log(model.serialize());
     expect(model).toHaveProperty('id');
     expect(model).toHaveProperty('name');
+    expect(model).toHaveProperty('createdAt');
+    expect(model).toHaveProperty('updatedAt');
   });
   it('public write API', () => {
     expect.hasAssertions();
     const model: IAgent = new Agent(createPayload);
     const updatedName = 'James Santana';
     model.name = updatedName;
+    const now = new Date();
+    model.updatedAt = now;
     expect(model.name).toBe(updatedName);
+    expect(model.updatedAt).toBe(now);
   });
   it('create new Model - name must match', () => {
     expect.hasAssertions();

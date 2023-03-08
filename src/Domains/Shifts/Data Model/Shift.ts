@@ -1,27 +1,23 @@
 /* eslint-disable no-underscore-dangle */
-import { UUID } from '@src/Infrastructure/utils/UUID';
 import { IShift } from '@src/Domains/Shifts/Data Entity/IShift';
-import { IAgent } from '@src/Domains/Agents/Data Entity/IAgent';
+import { BaseModel } from '@src/Infrastructure/Persistence/BaseModel';
 
-export class Shift implements IShift {
-  private _id: string;
+export class Shift extends BaseModel implements IShift {
   private _facilityId: string;
-  private _agents: IAgent[];
-  private _startDate: number;
-  private _endDate?: number;
+  private _agents: Record<string, unknown>[];
+  private _startDate: Date;
+  private _endDate?: Date;
   private _duration = 8 * 60 * 60 * 1000;
+
   constructor(
-    { facilityId, agents, id }: { agents: IAgent[], facilityId: string, id?: string }
+    { facilityId, agents, id }: { agents: Record<string, unknown>[], facilityId: string, id?: string }
   ) {
-    this._id = id ? UUID.parse(id).toString() : UUID.create().toString();
+    super(id);
     this._facilityId = facilityId;
     this._agents = agents;
-    this._startDate = (new Date()).getMilliseconds();
-    this._endDate = this._startDate + this._duration;
-  }
-
-  public get id(): string {
-    return this._id;
+    const now = new Date();
+    this._startDate = now;
+    this._endDate = new Date(now.getMilliseconds() + this._duration);
   }
 
   public get facilityId(): string {
@@ -33,18 +29,22 @@ export class Shift implements IShift {
   }
 
   public get startDate(): Date {
-    return new Date(this._startDate);
+    return this._startDate;
+  }
+
+  public set endDate(endDate: Date) {
+    this._endDate = endDate;
   }
 
   public get endDate(): Date {
-    return new Date(this._endDate);
+    return this._endDate;
   }
 
-  public get agents(): IAgent[] {
+  public get agents(): Record<string, unknown>[] {
     return this._agents;
   }
 
-  public set agents(agents: IAgent[]) {
+  public set agents(agents: Record<string, unknown>[]) {
     this._agents = agents;
   }
 
@@ -55,6 +55,7 @@ export class Shift implements IShift {
       agents: this.agents,
       startDate: this.startDate,
       endDate: this.endDate,
+      ...this.baseSerialize(),
     };
   }
 }

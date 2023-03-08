@@ -1,16 +1,14 @@
 import { IShift } from '@src/Domains/Shifts/Data Entity/IShift';
 import { InMemoryStore } from '@src/Infrastructure/Persistence/InMemory';
+import { BaseRepo } from '@src/Infrastructure/Persistence/BaseRepo';
+import { Paging } from '@src/Infrastructure/Persistence/Paging';
 
-interface paging {
-  records: unknown[];
-  page: number;
-  pages: number;
-}
+export class ShiftInMemoryDataRepository extends BaseRepo<IShift> {
+  public store;
+  public limit: number;
 
-export class ShiftInMemoryDataRepository {
-  private store;
-  private limit: number;
   constructor(limit = 30) {
+    super(limit);
     this.store = InMemoryStore.Shift;
     this.limit = limit || 30;
   }
@@ -33,7 +31,7 @@ export class ShiftInMemoryDataRepository {
     return this.store.get(id);
   }
 
-  public getAll(page = 1): paging {
+  public getAll(page = 1): Paging {
     if (page < 1) {
       throw new Error('page must be greater than 0');
     }

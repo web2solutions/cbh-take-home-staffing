@@ -1,16 +1,14 @@
 import { IFacility } from '@src/Domains/Facilities/Data Entity/IFacility';
 import { InMemoryStore } from '@src/Infrastructure/Persistence/InMemory';
+import { BaseRepo } from '@src/Infrastructure/Persistence/BaseRepo';
+import { Paging } from '@src/Infrastructure/Persistence/Paging';
 
-interface paging {
-  records: unknown[];
-  page: number;
-  pages: number;
-}
+export class FacilityInMemoryDataRepository extends BaseRepo<IFacility> {
+  public store;
+  public limit: number;
 
-export class FacilityInMemoryDataRepository {
-  private store;
-  private limit: number;
   constructor(limit?: number) {
+    super(limit);
     this.store = InMemoryStore.Facility;
     this.limit = limit || 30;
   }
@@ -33,7 +31,7 @@ export class FacilityInMemoryDataRepository {
     return this.store.get(id);
   }
 
-  public getAll(page = 1): paging {
+  public getAll(page = 1): Paging {
     if (page < 1) {
       throw new Error('page must be greater than 0');
     }
