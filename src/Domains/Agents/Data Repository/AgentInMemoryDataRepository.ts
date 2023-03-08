@@ -1,16 +1,13 @@
 import { IAgent } from '@src/Domains/Agents/Data Entity/IAgent';
-import { InMemoryStore } from '@src/infra/Database Clients/InMemory';
+import { InMemoryStore } from '@src/Infrastructure/Persistence/InMemory';
+import { BaseRepo } from '@src/Infrastructure/Persistence/BaseRepo';
+import { Paging } from '@src/Infrastructure/Persistence/Paging';
 
-interface paging {
-  records: unknown[];
-  page: number;
-  pages: number;
-}
-
-export class AgentInMemoryDataRepository {
-  private store;
-  private limit: number;
+export class AgentInMemoryDataRepository extends BaseRepo<IAgent> {
+  public store;
+  public limit: number;
   constructor(limit?: number) {
+    super(limit);
     this.store = InMemoryStore.Agent;
     this.limit = limit || 30;
   }
@@ -33,7 +30,7 @@ export class AgentInMemoryDataRepository {
     return this.store.get(id);
   }
 
-  public getAll(page = 1): paging {
+  public getAll(page = 1): Paging {
     if (page < 1) {
       throw new Error('page must be greater than 0');
     }

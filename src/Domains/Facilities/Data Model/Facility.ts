@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import { UUID } from '@src/infra/utils/UUID';
+import { UUID } from '@src/Infrastructure/utils/UUID';
 import { IFacility } from '@src/Domains/Facilities/Data Entity/IFacility';
 
 export class Facility implements IFacility {

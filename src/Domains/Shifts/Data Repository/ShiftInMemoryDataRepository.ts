@@ -1,5 +1,5 @@
 import { IShift } from '@src/Domains/Shifts/Data Entity/IShift';
-import { InMemoryStore } from '@src/infra/Database Clients/InMemory';
+import { InMemoryStore } from '@src/Infrastructure/Persistence/InMemory';
 
 interface paging {
   records: unknown[];

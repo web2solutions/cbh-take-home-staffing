@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import { IAgent } from '@src/Domains/Agents/Data Entity/IAgent';
-import { UUID } from '@src/infra/utils/UUID';
+import { UUID } from '@src/Infrastructure/utils/UUID';
 
 export class Agent implements IAgent {
   private _id: string;

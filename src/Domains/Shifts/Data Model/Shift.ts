@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import { UUID } from '@src/infra/utils/UUID';
+import { UUID } from '@src/Infrastructure/utils/UUID';
 import { IShift } from '@src/Domains/Shifts/Data Entity/IShift';
 import { IAgent } from '@src/Domains/Agents/Data Entity/IAgent';
 

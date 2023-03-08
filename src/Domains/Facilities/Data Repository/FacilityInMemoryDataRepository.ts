@@ -1,5 +1,5 @@
 import { IFacility } from '@src/Domains/Facilities/Data Entity/IFacility';
-import { InMemoryStore } from '@src/infra/Database Clients/InMemory';
+import { InMemoryStore } from '@src/Infrastructure/Persistence/InMemory';
 
 interface paging {
   records: unknown[];
