@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable class-methods-use-this */
 import { Paging } from '@src/Infrastructure/Persistence/Paging';
 import { InMemoryStore } from '@src/Infrastructure/Persistence/InMemory';
 
