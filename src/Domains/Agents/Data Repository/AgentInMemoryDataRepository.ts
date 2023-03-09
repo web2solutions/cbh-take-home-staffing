@@ -30,7 +30,7 @@ export class AgentInMemoryDataRepository extends BaseRepo<IAgent> {
     return this.store.get(id);
   }
 
-  public getAll(page = 1): Paging {
+  public getAll(page = 1): Paging<IAgent> {
     if (page < 1) {
       throw new Error('page must be greater than 0');
     }

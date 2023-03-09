@@ -13,5 +13,5 @@ export abstract class BaseRepo<T> {
   public abstract update(id: string, data: T): T;
   public abstract delete(id: string): boolean;
   public abstract getOneById(id: string): T;
-  public abstract getAll(page: number): Paging;
+  public abstract getAll(page: number): Paging<T>;
 }

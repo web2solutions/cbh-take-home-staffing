@@ -31,7 +31,7 @@ export class FacilityInMemoryDataRepository extends BaseRepo<IFacility> {
     return this.store.get(id);
   }
 
-  public getAll(page = 1): Paging {
+  public getAll(page = 1): Paging<IFacility> {
     if (page < 1) {
       throw new Error('page must be greater than 0');
     }
