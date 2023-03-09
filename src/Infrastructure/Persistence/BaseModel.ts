@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import { UUID } from '@src/Infrastructure/utils/UUID';
+import { UUID } from '@src/Infrastructure/Persistence/utils';
 
 export abstract class BaseModel {
   private _createdAt: Date;

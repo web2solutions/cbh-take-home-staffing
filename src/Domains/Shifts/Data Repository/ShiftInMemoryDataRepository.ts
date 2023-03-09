@@ -4,20 +4,7 @@ import { Shift } from '@src/Domains/Shifts/Data Model/Shift';
 import { InMemoryStore } from '@src/Infrastructure/Persistence/InMemory';
 import { BaseRepo } from '@src/Infrastructure/Persistence/BaseRepo';
 import { Paging } from '@src/Infrastructure/Persistence/Paging';
-
-enum operators {
-  equal = 'equal',
-}
-
-interface IFilter {
-  atrributeName: string;
-  operator: operators;
-  value: unknown,
-}
-interface ISearch {
-  operator?: string;
-  filters?: IFilter[];
-}
+import { operators, ISearch } from '@src/Infrastructure/Persistence/utils';
 
 export class ShiftInMemoryDataRepository extends BaseRepo<IShift> {
   public store;
