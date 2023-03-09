@@ -61,7 +61,8 @@ export class ShiftInMemoryDataRepository extends BaseRepo<IShift> {
     return { records, page, pages };
   }
 
-  public search({ operator = 'AND', filters = [] }: ISearch): IShift[] {
+  public search(query?: ISearch): IShift[] {
+    const { operator = 'AND', filters = [] } = query || {};
     const records: IShift[] = [];
     // eslint-disable-next-line no-restricted-syntax
     for (const value of this.store.values()) {
@@ -81,7 +82,7 @@ export class ShiftInMemoryDataRepository extends BaseRepo<IShift> {
         if (operator === 'AND' && filtersSatisfied === filters.length) {
           records.push(model);
         }
-        if (operator === 'OR' && filtersSatisfied > 1) {
+        if (operator === 'OR' && filtersSatisfied > 0) {
           records.push(model);
         }
       } else {
@@ -102,8 +103,6 @@ export class ShiftInMemoryDataRepository extends BaseRepo<IShift> {
         },
       ],
     });
-    // eslint-disable-next-line no-console
-    console.log({ records });
     return records;
   }
 }

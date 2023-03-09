@@ -1,4 +1,4 @@
-import { UUID } from '@src/Infrastructure/utils/UUID';
+import { UUID } from '@src/Infrastructure/Persistence/utils';
 
 const AGENT1 = {
   id: UUID.create().toString(),
@@ -17,18 +17,30 @@ const AGENT4 = {
   name: 'Barack Obama',
 };
 
-const FACILITY1ID = UUID.create().toString();
-const FACILITY2ID = UUID.create().toString();
-
 export const seed = [
   {
     id: UUID.create().toString(),
     agents: [AGENT1, AGENT2],
-    facilityId: FACILITY1ID,
+    facilityId: UUID.create().toString(),
   },
   {
     id: UUID.create().toString(),
     agents: [AGENT3, AGENT4],
-    facilityId: FACILITY2ID,
+    facilityId: UUID.create().toString(),
+  },
+  {
+    id: UUID.create().toString(),
+    agents: [AGENT3, AGENT4],
+    facilityId: UUID.create().toString(),
+  },
+  {
+    id: UUID.create().toString(),
+    agents: [AGENT3, AGENT4],
+    facilityId: UUID.create().toString(),
+  },
+  {
+    id: UUID.create().toString(),
+    agents: [AGENT3, AGENT4],
+    facilityId: UUID.create().toString(),
   },
 ];

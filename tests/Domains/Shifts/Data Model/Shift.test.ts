@@ -1,6 +1,6 @@
 import { Shift } from '@src/Domains/Shifts/Data Model/Shift';
 import { IShift } from '@src/Domains/Shifts//Data Entity/IShift';
-import { UUID } from '@src/Infrastructure/utils/UUID';
+import { UUID } from '@src/Infrastructure/Persistence/utils';
 
 const FACILITYID = UUID.create().toString();
 
