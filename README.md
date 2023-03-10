@@ -1,8 +1,13 @@
 # Pseudo code for a Human Resource application
 
-- `Design approach`: Domain Driven Design, The Clean Architecture, SOLID.
-- `Database type`: NoSQL
+- `Design approach`
+  - Domain Driven Design
+  - The Clean Architecture
+  - Hexagonal Architecture
+  - SOLID.
+  - Monolithic. Ability to quickly switch to microservice.
 - `Language`: TypeScript
+- `Database`: Agnostic, In Memory, Key/Value, NoSQL
 
 ## Domains
 

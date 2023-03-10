@@ -7,8 +7,6 @@ describe('agent Data Model', () => {
   it('public read API', () => {
     expect.hasAssertions();
     const model: IAgent = new Agent(createPayload);
-    // eslint-disable-next-line no-console
-    console.log(model.serialize());
     expect(model).toHaveProperty('id');
     expect(model).toHaveProperty('name');
     expect(model).toHaveProperty('createdAt');

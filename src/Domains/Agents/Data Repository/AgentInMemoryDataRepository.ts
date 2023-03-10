@@ -8,6 +8,7 @@ export class AgentInMemoryDataRepository extends BaseRepo<IAgent> {
   public limit: number;
   constructor(limit?: number) {
     super(limit);
+    // points to a collection or table
     this.store = InMemoryStore.Agent;
     this.limit = limit || 30;
   }

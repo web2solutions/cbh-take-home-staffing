@@ -122,7 +122,7 @@ describe('shift Data Repository', () => {
   it('getShiftsByFacility records', () => {
     expect.hasAssertions();
     const records = repo.getShiftsByFacility(seed[0].facilityId);
-    console.log('getShiftsByFacility records', records);
+    // console.log('getShiftsByFacility records', records);
     expect(records.length > 0).toBe(true);
   });
   it('search records with OR operator', () => {
@@ -141,13 +141,13 @@ describe('shift Data Repository', () => {
         }],
       }
     );
-    console.log('search records with OR operator', records);
+    // console.log('search records with OR operator', records);
     expect(records.length > 0).toBe(true);
   });
   it('search records with no filters and no operator', () => {
     expect.hasAssertions();
     const records = repo.search();
-    console.log('search records with no filters and no operator', records);
+    // console.log('search records with no filters and no operator', records);
     expect(records.length > 0).toBe(true);
   });
 });
