@@ -16,12 +16,22 @@ export class ShiftInMemoryDataRepository extends BaseRepo<IShift> {
     this.limit = limit || 30;
   }
 
+  private hasDuplicatedId(id: string): void {
+    if (this.getOneById(id)) {
+      throw new Error('Duplicated ID');
+    }
+  }
+
   public create(data: IShift): IShift {
+    this.hasDuplicatedId(data.id);
     this.store.set(data.id, data.serialize());
     return data;
   }
 
   public update(id: string, data: IShift): IShift {
+    if (!this.getOneById(id)) {
+      throw new Error('Not Found');
+    }
     this.store.set(id, data.serialize());
     return data;
   }

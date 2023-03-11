@@ -46,22 +46,38 @@ describe('shift Data Model', () => {
       name: 'James Belush',
     };
 
-    model.agents.push(agent2);
+    // model.agents.push(agent2);
+    // expect(model.agents[1].name).toBe(agent2.name);
 
     expect(model.id).toBe(ID);
 
     expect(model.facilityId).toBe(updatedFacilityId);
     expect(model.updatedAt).toBe(now);
     expect(model.endDate).toBe(now);
-    expect(model.agents[1].name).toBe(agent2.name);
 
     model.agents = [agent2];
     expect(model.agents[0].name).toBe(agent2.name);
+
+    expect(() => {
+      // eslint-disable-next-line no-new
+      model.agents = [agent2, agent2];
+    }).toThrow('Duplicated ID');
   });
   it('create new Model - facilityId must match', () => {
     expect.hasAssertions();
     const model: IShift = new Shift(createPayload);
     expect(model.facilityId).toBe(FACILITYID);
+  });
+  it('create new Model - duplicated Agent ID must throw', () => {
+    expect.hasAssertions();
+    const agent2 = {
+      id: UUID.create().toString(),
+      name: 'James Belush',
+    };
+    expect(() => {
+      // eslint-disable-next-line no-new
+      new Shift({ ...createPayload, agents: [agent2, agent2] });
+    }).toThrow('Duplicated ID');
   });
   it('update existing Model - check id', () => {
     expect.hasAssertions();

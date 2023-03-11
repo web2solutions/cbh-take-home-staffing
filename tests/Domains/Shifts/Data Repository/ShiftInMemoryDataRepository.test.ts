@@ -36,6 +36,9 @@ describe('shift Data Repository', () => {
     expect(record).toHaveProperty('id');
     expect(record.id).toBe(newId);
     expect(record.facilityId).toBe(newFacilityId);
+    expect(() => {
+      repo.create(model);
+    }).toThrow('Duplicated ID');
   });
   it('create record without ID', () => {
     expect.hasAssertions();
@@ -63,6 +66,14 @@ describe('shift Data Repository', () => {
     repo.update(seed[1].id, new Shift(record));
     record = repo.getOneById(seed[1].id);
     expect(record.facilityId).toBe(newFacilityId);
+  });
+  it('update record with no existing id must throw', () => {
+    expect.hasAssertions();
+    const record = repo.getOneById(seed[1].id);
+    record.id = UUID.create().toString();
+    expect(() => {
+      repo.update(record.id, new Shift(record));
+    }).toThrow('Not Found');
   });
   it('delete record', () => {
     expect.hasAssertions();

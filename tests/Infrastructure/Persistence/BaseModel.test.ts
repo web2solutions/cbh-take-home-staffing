@@ -4,7 +4,7 @@ import { BaseModel } from '@src/Infrastructure/Persistence/BaseModel';
 
 class TestableBaseModel extends BaseModel {}
 
-describe('agent Data Model', () => {
+describe('infrastructure/Persistence BaseModel', () => {
   describe('component public API', () => {
     const model = new TestableBaseModel();
     it('check getters', () => {

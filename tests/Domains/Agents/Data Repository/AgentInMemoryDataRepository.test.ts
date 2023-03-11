@@ -1,6 +1,7 @@
 import { AgentInMemoryDataRepository } from '@src/Domains/Agents/Data Repository/AgentInMemoryDataRepository';
 import { Agent } from '@src/Domains/Agents/Data Model/Agent';
 import { seed } from '@tests/Domains/Agents/Payloads/seed';
+import { UUID } from '@src/Infrastructure/Persistence/utils';
 
 const Joe = {
   name: 'Joe Biden',
@@ -37,6 +38,9 @@ describe('agent Data Repository', () => {
     expect(record).toHaveProperty('id');
     expect(record.id).toBe(Joe.id);
     expect(record.name).toBe(Joe.name);
+    expect(() => {
+      repo.create(model);
+    }).toThrow('Duplicated ID');
   });
   it('create record without ID', () => {
     expect.hasAssertions();
@@ -60,6 +64,14 @@ describe('agent Data Repository', () => {
     repo.update(Joe.id, new Agent(record));
     record = repo.getOneById(Joe.id);
     expect(record.name).toBe('Biden Joe');
+  });
+  it('update record with no existing id must throw', () => {
+    expect.hasAssertions();
+    const record = repo.getOneById(Joe.id);
+    record.id = UUID.create().toString();
+    expect(() => {
+      repo.update(record.id, new Agent(record));
+    }).toThrow('Not Found');
   });
   it('delete record', () => {
     expect.hasAssertions();

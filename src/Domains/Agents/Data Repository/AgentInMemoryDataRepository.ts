@@ -13,12 +13,22 @@ export class AgentInMemoryDataRepository extends BaseRepo<IAgent> {
     this.limit = limit || 30;
   }
 
+  private hasDuplicatedId(id: string): void {
+    if (this.getOneById(id)) {
+      throw new Error('Duplicated ID');
+    }
+  }
+
   public create(data: IAgent): IAgent {
+    this.hasDuplicatedId(data.id);
     this.store.set(data.id, data.serialize());
     return data;
   }
 
   public update(id: string, data: IAgent): IAgent {
+    if (!this.getOneById(id)) {
+      throw new Error('Not Found');
+    }
     this.store.set(id, data.serialize());
     return data;
   }

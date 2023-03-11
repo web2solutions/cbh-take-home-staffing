@@ -13,12 +13,22 @@ export class FacilityInMemoryDataRepository extends BaseRepo<IFacility> {
     this.limit = limit || 30;
   }
 
+  private hasDuplicatedId(id: string): void {
+    if (this.getOneById(id)) {
+      throw new Error('Duplicated ID');
+    }
+  }
+
   public create(data: IFacility): IFacility {
+    this.hasDuplicatedId(data.id);
     this.store.set(data.id, data.serialize());
     return data;
   }
 
   public update(id: string, data: IFacility): IFacility {
+    if (!this.getOneById(id)) {
+      throw new Error('Not Found');
+    }
     this.store.set(id, data.serialize());
     return data;
   }

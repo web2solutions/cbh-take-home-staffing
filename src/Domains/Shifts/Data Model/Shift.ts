@@ -14,6 +14,7 @@ export class Shift extends BaseModel implements IShift {
   ) {
     super(id);
     this._facilityId = facilityId;
+    Shift.hasDuplicatedId(agents);
     this._agents = agents;
     const now = new Date();
     this._startDate = now;
@@ -41,11 +42,19 @@ export class Shift extends BaseModel implements IShift {
   }
 
   public get agents(): Record<string, unknown>[] {
-    return this._agents;
+    return [...this._agents];
   }
 
   public set agents(agents: Record<string, unknown>[]) {
+    Shift.hasDuplicatedId(agents);
     this._agents = agents;
+  }
+
+  private static hasDuplicatedId(data: Record<string, unknown>[]): void {
+    const set = new Set(data.map((record) => record.id));
+    if (!(set.size === data.length)) {
+      throw new Error('Duplicated ID');
+    }
   }
 
   public serialize(): Record<string, unknown> {

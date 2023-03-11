@@ -1,6 +1,7 @@
 import { FacilityInMemoryDataRepository } from '@src/Domains/Facilities/Data Repository/FacilityInMemoryDataRepository';
 import { Facility } from '@src/Domains/Facilities/Data Model/Facility';
 import { seed } from '@tests/Domains/Facilities/Payloads/seed';
+import { UUID } from '@src/Infrastructure/Persistence/utils';
 
 const Billing = {
   name: 'Billing Engineers',
@@ -37,6 +38,9 @@ describe('facility Data Repository', () => {
     expect(record).toHaveProperty('id');
     expect(record.id).toBe(Billing.id);
     expect(record.name).toBe(Billing.name);
+    expect(() => {
+      repo.create(model);
+    }).toThrow('Duplicated ID');
   });
   it('create record without ID', () => {
     expect.hasAssertions();
@@ -60,6 +64,14 @@ describe('facility Data Repository', () => {
     repo.update(Billing.id, new Facility(record));
     record = repo.getOneById(Billing.id);
     expect(record.name).toBe('Engineers Billing');
+  });
+  it('update record with no existing id must throw', () => {
+    expect.hasAssertions();
+    const record = repo.getOneById(Billing.id);
+    record.id = UUID.create().toString();
+    expect(() => {
+      repo.update(record.id, new Facility(record));
+    }).toThrow('Not Found');
   });
   it('delete record', () => {
     expect.hasAssertions();
