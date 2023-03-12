@@ -8,20 +8,25 @@ orbs:
   codecov: codecov/codecov@3.2.4
 
 jobs:
-  - build_and_test: # this can be any name you choose
+  - test_and_lint_source: # this can be any name you choose
     executor: node/default # use the default executor defined within the orb
     steps:
       - checkout
       - node/install-packages:
         pkg-manager: npm
       - run:
-        command: npm run build
+        command: npm run lint
         name: Lint source
       - run:
         command: npm run test
         name: Run tests
-    post-steps:
-      - codecov/upload
+
+workflows:
+  build_test_deploy: # this can be any name you choose
+    jobs:
+      - test_and_lint_source:
+        post-steps:
+          - codecov/upload
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
