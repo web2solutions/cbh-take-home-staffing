@@ -4,9 +4,9 @@ Clean architectured, Infrastructure agnostic and Domain Driven designed Human Re
 
 | Status                                  |                                                               |
 | ------------------------------------- | ----------------------------------------------------------------------- |
-| 🚨 **Tests**                          | [![CircleCI](https://dl.circleci.com/status-badge/img/gh/web2solutions/cbh-take-home-staffing/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/web2solutions/cbh-take-home-staffing/tree/main) |
-| 🎁 **Coverage**               | [![codecov](https://codecov.io/gh/web2solutions/cbh-take-home-staffing/branch/main/graph/badge.svg?token=5118POS3ED)](https://codecov.io/gh/web2solutions/cbh-take-home-staffing) |
-| 🛡 **Security**     | ![Known Vulnerabilities](https://snyk.io/test/github/web2solutions/cbh-take-home-staffing/badge.svg)                                         |
+| **Tests**                          | [![CircleCI](https://dl.circleci.com/status-badge/img/gh/web2solutions/cbh-take-home-staffing/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/web2solutions/cbh-take-home-staffing/tree/main) |
+| **Coverage**               | [![codecov](https://codecov.io/gh/web2solutions/cbh-take-home-staffing/branch/main/graph/badge.svg?token=5118POS3ED)](https://codecov.io/gh/web2solutions/cbh-take-home-staffing) |
+| **Security**     | ![Known Vulnerabilities](https://snyk.io/test/github/web2solutions/cbh-take-home-staffing/badge.svg)                                         |
 
 ![cov](https://codecov.io/gh/web2solutions/cbh-take-home-staffing/branch/main/graphs/sunburst.svg?token=5118POS3ED)
 
