@@ -1,6 +1,6 @@
 import { FacilityInMemoryDataRepository } from '@src/Domains/Facilities/Data Repository/FacilityInMemoryDataRepository';
 import { Facility } from '@src/Domains/Facilities/Data Model/Facility';
-import { seed } from '@tests/Domains/Facilities/Payloads/seed';
+import { seed } from '@tests/Unit/Domains/Facilities/Payloads/seed';
 import { UUID } from '@src/Infrastructure/Persistence/utils';
 
 const Billing = {

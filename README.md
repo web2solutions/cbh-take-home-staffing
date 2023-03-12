@@ -6,7 +6,9 @@
 
 ![cov](https://codecov.io/gh/web2solutions/cbh-take-home-staffing/branch/main/graphs/sunburst.svg?token=5118POS3ED)
 
-- `Design approach`
+### Architecture
+
+- `Design principles`
   - Domain Driven Design
   - The Clean Architecture
   - Hexagonal Architecture
@@ -70,12 +72,11 @@
 
 
 
-## how to get started:
+## How to get started
 
 1. [Install Node.js](https://nodejs.org/en/download/)
 2. Run `npm i` in this repo to install dependencies
 3. Run `npm test` to run the automated tests
-
 
 ## ToDo
 

@@ -1,12 +1,12 @@
-import { Facility } from '@src/Domains/Facilities/Data Model/Facility';
-import { IFacility } from '@src/Domains/Facilities//Data Entity/IFacility';
-import { createPayload } from '@tests/Domains/Facilities/Payloads/create';
-import { updatePayload } from '@tests/Domains/Facilities/Payloads/update';
+import { Agent } from '@src/Domains/Agents/Data Model/Agent';
+import { IAgent } from '@src/Domains/Agents//Data Entity/IAgent';
+import { createPayload } from '@tests/Unit/Domains/Agents/Payloads/create';
+import { updatePayload } from '@tests/Unit/Domains/Agents/Payloads/update';
 
-describe('facility Data Model', () => {
+describe('agent Data Model', () => {
   it('public read API', () => {
     expect.hasAssertions();
-    const model: IFacility = new Facility(createPayload);
+    const model: IAgent = new Agent(createPayload);
     expect(model).toHaveProperty('id');
     expect(model).toHaveProperty('name');
     expect(model).toHaveProperty('createdAt');
@@ -14,8 +14,8 @@ describe('facility Data Model', () => {
   });
   it('public write API', () => {
     expect.hasAssertions();
-    const model: IFacility = new Facility(createPayload);
-    const updatedName = 'Recruiting - Engineers';
+    const model: IAgent = new Agent(createPayload);
+    const updatedName = 'James Santana';
     model.name = updatedName;
     const now = new Date();
     model.updatedAt = now;
@@ -24,34 +24,34 @@ describe('facility Data Model', () => {
   });
   it('create new Model - name must match', () => {
     expect.hasAssertions();
-    const model: IFacility = new Facility(createPayload);
-    expect(model.name).toBe('Recruiting');
+    const model: IAgent = new Agent(createPayload);
+    expect(model.name).toBe('Jose Eduardo');
   });
   it('update existing Model - check id', () => {
     expect.hasAssertions();
     expect(() => {
       // eslint-disable-next-line no-new
-      new Facility({ ...updatePayload, id: 'xxxxxxxx' });
+      new Agent({ ...updatePayload, id: 'xxxxxxxx' });
     }).toThrow('Invalid UUID');
   });
   it('update existing Model - name must match', () => {
     expect.hasAssertions();
-    const model: IFacility = new Facility(updatePayload);
-    const updatedName = 'Recruiting - Engineers';
+    const model: IAgent = new Agent(updatePayload);
+    const updatedName = 'James Santana';
     model.name = updatedName;
     expect(model.name).toBe(updatedName);
     expect(model.id).toBe(updatePayload.id);
   });
   it('serialize', () => {
     expect.hasAssertions();
-    const model: IFacility = new Facility(updatePayload);
+    const model: IAgent = new Agent(updatePayload);
     let data = model.serialize();
-    expect(data.name).toBe('Recruiting');
+    expect(data.name).toBe('Jose Eduardo');
     expect(data.id).toBe(updatePayload.id);
-    const updatedName = 'Recruiting - Engineers';
+    const updatedName = 'James Santana';
     model.name = updatedName;
     data = model.serialize();
-    expect(data.id).toBe(updatePayload.id);
     expect(data.name).toBe(updatedName);
+    expect(data.id).toBe(updatePayload.id);
   });
 });

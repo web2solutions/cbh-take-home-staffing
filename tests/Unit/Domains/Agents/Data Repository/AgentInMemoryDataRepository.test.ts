@@ -1,6 +1,6 @@
 import { AgentInMemoryDataRepository } from '@src/Domains/Agents/Data Repository/AgentInMemoryDataRepository';
 import { Agent } from '@src/Domains/Agents/Data Model/Agent';
-import { seed } from '@tests/Domains/Agents/Payloads/seed';
+import { seed } from '@tests/Unit/Domains/Agents/Payloads/seed';
 import { UUID } from '@src/Infrastructure/Persistence/utils';
 
 const Joe = {

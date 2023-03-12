@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { ShiftInMemoryDataRepository } from '@src/Domains/Shifts/Data Repository/ShiftInMemoryDataRepository';
 import { Shift } from '@src/Domains/Shifts/Data Model/Shift';
-import { seed } from '@tests/Domains/Shifts/Payloads/seed';
+import { seed } from '@tests/Unit/Domains/Shifts/Payloads/seed';
 import { UUID, operators } from '@src/Infrastructure/Persistence/utils';
 
 describe('shift Data Repository', () => {
