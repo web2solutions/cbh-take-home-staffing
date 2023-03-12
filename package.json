@@ -3,13 +3,25 @@
   "version": "1.0.0",
   "description": "",
   "main": " ",
+  "author": {
+    "name": "Eduardo Almeida",
+    "url": "https://github.com/web2solutions",
+    "email": "web2solucoes@gmail.com"
+  },
+  "contributors": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/web2solutions/cbh-take-home-staffing.git"
+  },
+  "bugs": {
+    "url": "https://github.com/web2solutions/cbh-take-home-staffing/issues"
+  },
+  "license": "MIT",
   "scripts": {
     "test": "NODE_ENV=test ./node_modules/.bin/jest --ci --verbose --coverage",
     "start": "node index.js",
     "lint": "eslint . --ext .ts,.tsx"
   },
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@babel/core": "7.18.10",
     "@babel/preset-env": "7.18.10",
