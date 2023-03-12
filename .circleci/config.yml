@@ -39,10 +39,8 @@ jobs:
           command: npm run test
 
 workflows:
-  run-lint:
-    jobs:
-      - lint-source
   test-source:
     jobs:
+      - lint-source
       - test-source
 
