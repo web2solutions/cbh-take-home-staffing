@@ -1,6 +1,6 @@
 # HR System
 
-Infrastructure agnostic and Domain Driven designed Human Resource application.
+Clean architectured, Infrastructure agnostic and Domain Driven designed Human Resource application.
 
 ### Tests / coverage
 
