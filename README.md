@@ -1,4 +1,4 @@
-# Pseudo code for a Human Resource application
+# Infrastructure agnostic and Domain Driven designed HR application
 
 ### Tests / coverage
 
