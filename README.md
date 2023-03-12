@@ -2,9 +2,7 @@
 
 Clean architectured, Infrastructure agnostic and Domain Driven designed Human Resource application.
 
-### Test and coverage status
-
-`Tests:`
+`Testing status:`
 
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/web2solutions/cbh-take-home-staffing/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/web2solutions/cbh-take-home-staffing/tree/main)
 
