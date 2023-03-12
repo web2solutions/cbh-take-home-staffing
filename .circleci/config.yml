@@ -12,7 +12,7 @@ orbs:
 workflows:
   test-application-source: # This is the name of the workflow, feel free to change it to better match your workflow.
     jobs:
-      build_and_test: # this can be any name you choose
+      - build_and_test: # this can be any name you choose
         executor: node/default # use the default executor defined within the orb
         steps:
           - checkout
