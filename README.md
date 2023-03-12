@@ -8,6 +8,8 @@ Clean architectured, Infrastructure agnostic and Domain Driven designed Human Re
 
 ![cov](https://codecov.io/gh/web2solutions/cbh-take-home-staffing/branch/main/graphs/sunburst.svg?token=5118POS3ED)
 
+`Known Vulnerabilities:` [![Known Vulnerabilities](https://snyk.io/test/github/web2solutions/cbh-take-home-staffing/badge.svg)]
+
 ### Architecture
 
 - `Design principles`
