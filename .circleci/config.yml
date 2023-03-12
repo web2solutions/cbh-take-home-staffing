@@ -1,45 +1,45 @@
-# This config is equivalent to both the '.circleci/extended/orb-free.yml' and the base '.circleci/config.yml'
 version: 2.1
 
-# Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects.
-# See: https://circleci.com/docs/2.0/orb-intro/
-orbs:
-  node: circleci/node@4.7
-  codecov: codecov/codecov@3.2.4
-
 jobs:
-  - test_and_lint_source: # this can be any name you choose
-    executor: node/default # use the default executor defined within the orb
+  lint-source:
+    docker:
+      - image: cimg/node:18.8.0
     steps:
       - checkout
-      - node/install-packages:
-        pkg-manager: npm
+      - restore_cache:
+          keys:
+            - node-deps-v1-{{ .Branch }}-{{checksum "package-lock.json"}}
       - run:
-        command: npm run lint
-        name: Lint source
+          name: install packages
+          command: npm ci
+      - save_cache:
+          key: node-deps-v1-{{ .Branch }}-{{checksum "package-lock.json"}}
+          paths:
+            - ~/.npm
       - run:
-        command: npm run test
-        name: Run tests
+          name: Run ESlint
+          command: npm run lint
+  test-source:
+    docker:
+      - image: cimg/node:18.8.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - node-deps-v1-{{ .Branch }}-{{checksum "package-lock.json"}}
+      - run:
+          name: install packages
+          command: npm ci
+      - save_cache:
+          key: node-deps-v1-{{ .Branch }}-{{checksum "package-lock.json"}}
+          paths:
+            - ~/.npm
+      - run:
+          name: Run Tests
+          command: npm run test
 
 workflows:
-  build_test_deploy: # this can be any name you choose
+  test_my_app:
     jobs:
-      - test_and_lint_source:
-        post-steps:
-          - codecov/upload
+      - test-source
 
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
-#  workflows:
-#    test-application-source: # This is the name of the workflow, feel free to change it to better match your workflow.
-#      # Inside the workflow, you define the jobs you want to run.
-#      jobs:
-#        - node/test:
-#            # This is the node version to use for the `cimg/node` tag
-#            # Relevant tags can be found on the CircleCI Developer Hub
-#            # https://circleci.com/developer/images/image/cimg/node
-#            version: '16.10'
-#            # If you are using yarn, change the line below from "npm" to "yarn"
-#            pkg-manager: npm
-#            post-steps:
-#              - codecov/upload
