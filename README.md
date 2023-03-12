@@ -1,5 +1,7 @@
 # Pseudo code for a Human Resource application
 
+### Tests / coverage
+
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/web2solutions/cbh-take-home-staffing/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/web2solutions/cbh-take-home-staffing/tree/main) [![codecov](https://codecov.io/gh/web2solutions/cbh-take-home-staffing/branch/main/graph/badge.svg?token=5118POS3ED)](https://codecov.io/gh/web2solutions/cbh-take-home-staffing)
 
 ![cov](https://codecov.io/gh/web2solutions/cbh-take-home-staffing/branch/main/graphs/sunburst.svg?token=5118POS3ED)
