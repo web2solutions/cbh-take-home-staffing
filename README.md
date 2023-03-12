@@ -15,7 +15,6 @@
 
 ![UML classes](/domains.png "UML classes")
 
-
 #### Project Structure
 
     .
