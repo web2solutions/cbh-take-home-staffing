@@ -1,5 +1,7 @@
 # Pseudo code for a Human Resource application
 
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/web2solutions/cbh-take-home-staffing/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/web2solutions/cbh-take-home-staffing/tree/main)
+
 - `Design approach`
   - Domain Driven Design
   - The Clean Architecture
