@@ -16,8 +16,6 @@ describe('createAgent - Use Case', () => {
   it('component public API', async () => {
     expect.hasAssertions();
     const { error, data }: IComponentResponse = await createAgent(Obama, { repo });
-    /* eslint-disable no-console */
-    // console.log({ error, data });
     expect(error).toBeNull();
     expect(data).toHaveProperty('id');
     expect(data).toHaveProperty('name');
@@ -25,8 +23,8 @@ describe('createAgent - Use Case', () => {
     expect(data).toHaveProperty('updatedAt');
   });
   it('duplicated ID must return an error', async () => {
-    let agent2;
     expect.hasAssertions();
+    let agent2;
     {
       const { error, data }: IComponentResponse = await createAgent(Obama, { repo });
       expect(error).toBeNull();
@@ -41,7 +39,7 @@ describe('createAgent - Use Case', () => {
       const { error, data }: IComponentResponse = await createAgent(agent2, { repo });
       expect(data).toBe('');
       expect(error).toBeInstanceOf(Error);
-      expect(error.message).toBe('Duplicated ID'); 
+      expect(error.message).toBe('Duplicated ID');
     }
   });
 });
