@@ -8,17 +8,8 @@ const facilityStoreIndexes = {
 };
 export const FacilityStoreAPI = {
   delete: facilityStore.delete.bind(facilityStore),
-  // entries: facilityStore.entries.bind(facilityStore),
   getOneById: facilityStore.get.bind(facilityStore),
   values: facilityStore.values.bind(facilityStore),
-  // size: (): number => facilityStore.size,
-  // [Symbol.iterator]: facilityStore[Symbol.iterator].bind(facilityStore),
-  // [Symbol.toStringTag]: facilityStore[Symbol.toStringTag],
-  // forEach: facilityStore.forEach.bind(facilityStore),
-  // clear: facilityStore.clear.bind(facilityStore),
-  // has: facilityStore.has.bind(facilityStore),
-  // keys: facilityStore.keys.bind(facilityStore),
-  // set: facilityStore.set.bind(facilityStore),
   create: (key, value): IFacility => {
     const object = value as IFacility;
     if (facilityStore.has(key)) {

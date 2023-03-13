@@ -8,17 +8,8 @@ const agentStoreIndexes = {
 };
 export const AgentStoreAPI = {
   delete: agentStore.delete.bind(agentStore),
-  // entries: agentStore.entries.bind(agentStore),
   getOneById: agentStore.get.bind(agentStore),
   values: agentStore.values.bind(agentStore),
-  // size: (): number => agentStore.size,
-  // [Symbol.iterator]: agentStore[Symbol.iterator].bind(agentStore),
-  // [Symbol.toStringTag]: agentStore[Symbol.toStringTag],
-  // forEach: agentStore.forEach.bind(agentStore),
-  // clear: agentStore.clear.bind(agentStore),
-  // has: agentStore.has.bind(agentStore),
-  // keys: agentStore.keys.bind(agentStore),
-  // set: agentStore.set.bind(agentStore),
   create: (key, value): IAgent => {
     const object = value as IAgent;
     if (agentStore.has(key)) {

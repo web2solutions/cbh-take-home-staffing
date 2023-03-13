@@ -6,17 +6,8 @@ const shiftStore = new Map<string, unknown>();
 
 export const ShiftStoreAPI = {
   delete: shiftStore.delete.bind(shiftStore),
-  // entries: shiftStore.entries.bind(shiftStore),
   getOneById: shiftStore.get.bind(shiftStore),
   values: shiftStore.values.bind(shiftStore),
-  // size: (): number => shiftStore.size,
-  // [Symbol.iterator]: shiftStore[Symbol.iterator].bind(shiftStore),
-  // [Symbol.toStringTag]: shiftStore[Symbol.toStringTag],
-  // forEach: shiftStore.forEach.bind(shiftStore),
-  // clear: shiftStore.clear.bind(shiftStore),
-  // has: shiftStore.has.bind(shiftStore),
-  // keys: shiftStore.keys.bind(shiftStore),
-  // set: shiftStore.set.bind(shiftStore),
   create: (key, value): IShift => {
     const object = value as IShift;
     if (shiftStore.has(key)) {
