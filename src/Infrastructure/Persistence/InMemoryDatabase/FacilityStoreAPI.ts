@@ -1,19 +1,24 @@
 import { IFacility } from '@src/Domains/Facilities/Data Entity/IFacility';
 import { Paging } from '@src/Infrastructure/Persistence/Paging';
+import { IMapStore } from '@src/Infrastructure/Persistence/InMemoryDatabase/IMapStore';
 
 const facilityStore = new Map<string, unknown>();
 const facilityStoreIndexes = {
   name: new Map<string, unknown>(),
 };
 export const FacilityStoreAPI = {
-  clear: facilityStore.clear.bind(facilityStore),
   delete: facilityStore.delete.bind(facilityStore),
-  entries: facilityStore.entries.bind(facilityStore),
-  forEach: facilityStore.forEach.bind(facilityStore),
-  get: facilityStore.get.bind(facilityStore),
-  has: facilityStore.has.bind(facilityStore),
-  keys: facilityStore.keys.bind(facilityStore),
-  set: facilityStore.set.bind(facilityStore),
+  // entries: facilityStore.entries.bind(facilityStore),
+  getOneById: facilityStore.get.bind(facilityStore),
+  values: facilityStore.values.bind(facilityStore),
+  // size: (): number => facilityStore.size,
+  // [Symbol.iterator]: facilityStore[Symbol.iterator].bind(facilityStore),
+  // [Symbol.toStringTag]: facilityStore[Symbol.toStringTag],
+  // forEach: facilityStore.forEach.bind(facilityStore),
+  // clear: facilityStore.clear.bind(facilityStore),
+  // has: facilityStore.has.bind(facilityStore),
+  // keys: facilityStore.keys.bind(facilityStore),
+  // set: facilityStore.set.bind(facilityStore),
   create: (key, value): IFacility => {
     const object = value as IFacility;
     if (facilityStore.has(key)) {
@@ -78,8 +83,4 @@ export const FacilityStoreAPI = {
 
     return { records, pages, page };
   },
-  values: facilityStore.values.bind(facilityStore),
-  // size: (): number => facilityStore.size,
-  // [Symbol.iterator]: facilityStore[Symbol.iterator].bind(facilityStore),
-  // [Symbol.toStringTag]: facilityStore[Symbol.toStringTag],
-};
+} as IMapStore<IFacility>;

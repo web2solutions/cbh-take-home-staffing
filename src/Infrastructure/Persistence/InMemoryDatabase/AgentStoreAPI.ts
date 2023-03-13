@@ -1,19 +1,24 @@
 import { IAgent } from '@src/Domains/Agents/Data Entity/IAgent';
 import { Paging } from '@src/Infrastructure/Persistence/Paging';
+import { IMapStore } from '@src/Infrastructure/Persistence/InMemoryDatabase/IMapStore';
 
 const agentStore = new Map<string, unknown>();
 const agentStoreIndexes = {
   name: new Map<string, unknown>(),
 };
 export const AgentStoreAPI = {
-  clear: agentStore.clear.bind(agentStore),
   delete: agentStore.delete.bind(agentStore),
-  entries: agentStore.entries.bind(agentStore),
-  forEach: agentStore.forEach.bind(agentStore),
-  get: agentStore.get.bind(agentStore),
-  has: agentStore.has.bind(agentStore),
-  keys: agentStore.keys.bind(agentStore),
-  set: agentStore.set.bind(agentStore),
+  // entries: agentStore.entries.bind(agentStore),
+  getOneById: agentStore.get.bind(agentStore),
+  values: agentStore.values.bind(agentStore),
+  // size: (): number => agentStore.size,
+  // [Symbol.iterator]: agentStore[Symbol.iterator].bind(agentStore),
+  // [Symbol.toStringTag]: agentStore[Symbol.toStringTag],
+  // forEach: agentStore.forEach.bind(agentStore),
+  // clear: agentStore.clear.bind(agentStore),
+  // has: agentStore.has.bind(agentStore),
+  // keys: agentStore.keys.bind(agentStore),
+  // set: agentStore.set.bind(agentStore),
   create: (key, value): IAgent => {
     const object = value as IAgent;
     if (agentStore.has(key)) {
@@ -78,8 +83,4 @@ export const AgentStoreAPI = {
 
     return { records, pages, page };
   },
-  values: agentStore.values.bind(agentStore),
-  // size: (): number => agentStore.size,
-  // [Symbol.iterator]: agentStore[Symbol.iterator].bind(agentStore),
-  // [Symbol.toStringTag]: agentStore[Symbol.toStringTag],
-};
+} as IMapStore<IAgent>;

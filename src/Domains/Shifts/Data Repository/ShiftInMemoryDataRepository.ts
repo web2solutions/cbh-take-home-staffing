@@ -31,7 +31,7 @@ export class ShiftInMemoryDataRepository extends BaseRepo<IShift> {
   }
 
   public getOneById(id: string): IShift {
-    return this.store.get(id);
+    return this.store.getOneById(id);
   }
 
   public getAll(page = 1): Paging<IShift> {

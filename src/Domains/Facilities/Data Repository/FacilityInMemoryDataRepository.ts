@@ -28,7 +28,7 @@ export class FacilityInMemoryDataRepository extends BaseRepo<IFacility> {
   }
 
   public getOneById(id: string): IFacility {
-    return this.store.get(id);
+    return this.store.getOneById(id);
   }
 
   public getByName(name: string): IFacility {

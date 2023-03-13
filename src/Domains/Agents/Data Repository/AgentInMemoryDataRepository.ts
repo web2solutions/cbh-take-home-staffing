@@ -28,7 +28,7 @@ export class AgentInMemoryDataRepository extends BaseRepo<IAgent> {
   }
 
   public getOneById(id: string): IAgent {
-    return this.store.get(id);
+    return this.store.getOneById(id);
   }
 
   public getByName(name: string): IAgent {
