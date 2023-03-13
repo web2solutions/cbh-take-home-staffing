@@ -13,23 +13,13 @@ export class AgentInMemoryDataRepository extends BaseRepo<IAgent> {
     this.limit = limit || 30;
   }
 
-  private hasDuplicatedId(id: string): void {
-    if (this.getOneById(id)) {
-      throw new Error('Duplicated ID');
-    }
-  }
-
   public create(data: IAgent): IAgent {
-    this.hasDuplicatedId(data.id);
-    this.store.set(data.id, data.serialize());
+    this.store.create(data.id, data.serialize());
     return data;
   }
 
   public update(id: string, data: IAgent): IAgent {
-    if (!this.getOneById(id)) {
-      throw new Error('Not Found');
-    }
-    this.store.set(id, data.serialize());
+    this.store.update(id, data.serialize());
     return data;
   }
 
@@ -41,30 +31,12 @@ export class AgentInMemoryDataRepository extends BaseRepo<IAgent> {
     return this.store.get(id);
   }
 
-  public getAll(page = 1): Paging<IAgent> {
-    if (page < 1) {
-      throw new Error('page must be greater than 0');
-    }
-    const records = [];
-    let pages = 1;
-    const count = this.store.size;
-    pages = Math.ceil(count / this.limit);
-    if (page > pages) {
-      throw new Error('page number must be less than the number of total pages');
-    }
+  public getByName(name: string): IAgent {
+    return this.store.getByName(name);
+  }
 
-    const startAt = (page * this.limit) - this.limit;
-    let iterated = 0;
-    // eslint-disable-next-line no-restricted-syntax
-    for (const value of this.store.values()) {
-      // eslint-disable-next-line operator-assignment
-      iterated = iterated + 1;
-      if (iterated > startAt) {
-        if (records.length < this.limit) {
-          records.push(value);
-        }
-      }
-    }
-    return { records, page, pages };
+  public getAll(page = 1): Paging<IAgent> {
+    const result = this.store.getAll(page, this.limit);
+    return result;
   }
 }

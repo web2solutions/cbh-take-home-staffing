@@ -29,6 +29,7 @@ describe('agent Data Repository', () => {
     expect(repo).toHaveProperty('delete');
     expect(repo).toHaveProperty('getOneById');
     expect(repo).toHaveProperty('getAll');
+    expect(repo).toHaveProperty('getByName');
   });
   it('create record with ID', () => {
     expect.hasAssertions();
@@ -41,6 +42,10 @@ describe('agent Data Repository', () => {
     expect(() => {
       repo.create(model);
     }).toThrow('Duplicated ID');
+    expect(() => {
+      const model2 = new Agent({ ...Joe, id: UUID.create().toString() });
+      repo.create(model2);
+    }).toThrow('name already in use');
   });
   it('create record without ID', () => {
     expect.hasAssertions();
@@ -55,6 +60,14 @@ describe('agent Data Repository', () => {
     expect.hasAssertions();
     const record = repo.getOneById(Joe.id);
     expect(record.name).toBe(Joe.name);
+  });
+  it('getByName', () => {
+    expect.hasAssertions();
+    const record = repo.getByName(Joe.name);
+    expect(record.name).toBe(Joe.name);
+    expect(() => {
+      repo.getByName('Bill Gates');
+    }).toThrow('Not Found');
   });
   it('update record', () => {
     expect.hasAssertions();

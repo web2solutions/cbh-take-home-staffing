@@ -15,7 +15,7 @@ export class Shift extends BaseModel implements IShift {
     super(id);
     this._facilityId = facilityId;
     Shift.hasDuplicatedId(agents);
-    this._agents = agents;
+    this.agents = agents;
     const now = new Date();
     this._startDate = now;
     this._endDate = new Date(now.getMilliseconds() + this._duration);

@@ -3,8 +3,12 @@ import { createAgent } from '@src/Domains/Agents/Use Cases/createAgent';
 import { IComponentResponse } from '@src/Infrastructure/Utils';
 import { IAgent } from '@src/Domains/Agents/Data Entity/IAgent';
 
-const Obama = {
-  name: 'Barack Obama',
+const James = {
+  name: 'James',
+} as unknown as IAgent;
+
+const Steve = {
+  name: 'Steve',
 } as unknown as IAgent;
 
 describe('createAgent - Use Case', () => {
@@ -15,7 +19,7 @@ describe('createAgent - Use Case', () => {
   });
   it('component public API', async () => {
     expect.hasAssertions();
-    const { error, data }: IComponentResponse = await createAgent(Obama, { repo });
+    const { error, data }: IComponentResponse = await createAgent(James, { repo });
     expect(error).toBeNull();
     expect(data).toHaveProperty('id');
     expect(data).toHaveProperty('name');
@@ -26,7 +30,7 @@ describe('createAgent - Use Case', () => {
     expect.hasAssertions();
     let agent2;
     {
-      const { error, data }: IComponentResponse = await createAgent(Obama, { repo });
+      const { error, data }: IComponentResponse = await createAgent(Steve, { repo });
       expect(error).toBeNull();
       expect(data).toHaveProperty('id');
       expect(data).toHaveProperty('name');
@@ -36,10 +40,19 @@ describe('createAgent - Use Case', () => {
       agent2.name = 'New agent with same ID';
     }
     {
+      // agent2 has same ID as Steve but a different name
       const { error, data }: IComponentResponse = await createAgent(agent2, { repo });
       expect(data).toBe('');
       expect(error).toBeInstanceOf(Error);
       expect(error.message).toBe('Duplicated ID');
     }
+  });
+  it('duplicated name must return an error', async () => {
+    expect.hasAssertions();
+    // James will assume a new ID but will throw due that name is already in use
+    const { error, data }: IComponentResponse = await createAgent(James, { repo });
+    expect(data).toBe('');
+    expect(error).toBeInstanceOf(Error);
+    expect(error.message).toBe('name already in use');
   });
 });
